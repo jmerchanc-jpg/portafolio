@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título actualizado para la página de inicio -->
+    <title>Portafolio Juan Ángel Merchán Calderón: Inicio</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ... (El resto del <head> no cambia) ... -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Estilo para la fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- Animación de aparición de proyectos --- */
+        
+        /* Estado inicial de las tarjetas (fuera de la pantalla y transparentes) */
+        .project-card {
+            transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+        }
+
+        .project-card-left {
+            transform: translateX(-100%);
+        }
+
+        .project-card-right {
+            transform: translateX(100%);
+        }
+
+        /* Estado final cuando la clase 'is-visible' se añade (en pantalla y opaco) */
+        .project-card.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* --- Animación para la flecha de scroll --- */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white leading-relaxed">
+
+    <!-- 1. BARRA DE NAVEGACIÓN SUPERIOR -->
+    <header class="fixed top-0 left-0 right-0 bg-gray-900 bg-opacity-80 backdrop-blur-sm z-40 shadow-lg">
+        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Botón de Menú (Hamburguesa) - Izquierda -->
+                <div class="flex-shrink-0">
+                    <button id="menu-btn" class="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-label="Abrir menú">
+                        <!-- Icono de 3 barras -->
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Espacio para Logo - Derecha (AHORA ES UN ENLACE) -->
+                <div class="flex-shrink-0">
+                    <!-- CAMBIO: Envuelto en un <a> que lleva a index.html -->
+                    <a href="index.html" class="text-white font-bold text-xl tracking-wider">
+                        <img src="Google earth/logo.png" width="50" height="50" alt=""/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. MENÚ LATERAL DESPLEGABLE (Oculto por defecto) -->
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-64 bg-gray-800 shadow-xl z-50
+                           transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="p-4">
+            <!-- Encabezado del menú (con botón de cerrar) -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold">Menú</h2>
+                <button id="close-btn" class="p-1 rounded-md text-gray-400 hover:text-white hover:bg-gray-700" aria-label="Cerrar menú">
+                    <!-- Icono de 'X' -->
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Enlaces del menú (ACTUALIZADOS) -->
+            <nav>
+                <ul class="space-y-2">
+                    <li>
+                        <!-- CAMBIO: Enlace a la página de proyectos -->
+                        <a href="proyectos.html" class="block py-2.5 px-4 rounded-lg text-lg hover:bg-gray-700 transition-colors duration-200">
+                            Proyectos
+                        </a>
+                    </li>
+                    <li>
+                        <!-- CAMBIO: Enlace a la página de contacto -->
+                        <a href="contacto.html" class="block py-2.5 px-4 rounded-lg text-lg hover:bg-gray-700 transition-colors duration-200">
+                            Contacto
+                        </a>
+                    </li>
+                    <li>
+                        <!-- CAMBIO: Enlace a la página de redes -->
+                        <a href="redes.html" class="block py-2.5 px-4 rounded-lg text-lg hover:bg-gray-700 transition-colors duration-200">
+                            Redes
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Overlay (fondo oscuro al abrir el menú) -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden transition-opacity duration-300"></div>
+
+
+    <!-- 3. SECCIÓN PRINCIPAL (PORTADA) -->
+    <main id="inicio">
+        <section class="h-screen flex flex-col justify-center items-center text-center p-4 relative">
+            <!-- Título Central -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight">
+                Portafolio
+                <span class="block text-indigo-400 mt-2 sm:mt-4">Juan Ángel Merchán Calderón</span>
+            </h1>
+            
+            <!-- Flecha hacia abajo (aún apunta al id #proyectos en esta página) -->
+            <div class="absolute bottom-16">
+                <a href="#proyectos" class="animate-bounce-slow" aria-label="Ir a proyectos">
+                    <svg class="h-10 w-10 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Espacio para forzar el scroll -->
+        <div class="h-[50vh]"></div>
+
+        <!-- 4. SECCIÓN DE PROYECTOS (CON ANIMACIÓN DE SCROLL) -->
+        <section id="proyectos" class="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20 min-h-screen">
+            <h2 class="text-3xl font-bold text-center mb-16">Mis Proyectos</h2>
+
+            <!-- Contenedor de las miniaturas -->
+            <!-- 'overflow-x-hidden' en un padre previene el scroll horizontal causado por las animaciones -->
+            <div classclass="overflow-x-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                    <!-- Proyecto 1 (Aparece desde la Izquierda) -->
+                    <a href="#" class="project-card project-card-left block bg-gray-800 rounded-xl shadow-lg hover:shadow-indigo-500/30 overflow-hidden group">
+                        <div class="h-48 bg-gray-700 flex items-center justify-center">
+                            <span class="text-gray-500">Miniatura Proyecto 1</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Proyecto Uno</h3>
+                            <p class="text-gray-400">Breve descripción de este increíble proyecto...</p>
+                        </div>
+                    </a>
+
+                    <!-- Proyecto 2 (Aparece desde la Derecha) -->
+                    <a href="#" class="project-card project-card-right block bg-gray-800 rounded-xl shadow-lg hover:shadow-indigo-500/30 overflow-hidden group">
+                        <div class="h-48 bg-gray-700 flex items-center justify-center">
+                            <span class="text-gray-500">Miniatura Proyecto 2</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Proyecto Dos</h3>
+                            <p class="text-gray-400">Breve descripción de este increíble proyecto...</p>
+                        </div>
+                    </a>
+
+                    <!-- Proyecto 3 (Aparece desde la Izquierda) -->
+                    <a href="#" class="project-card project-card-left block bg-gray-800 rounded-xl shadow-lg hover:shadow-indigo-500/30 overflow-hidden group">
+                        <div class="h-48 bg-gray-700 flex items-center justify-center">
+                            <span class="text-gray-500">Miniatura Proyecto 3</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Proyecto Tres</h3>
+                            <p class="text-gray-400">Breve descripción de este increíble proyecto...</p>
+                        </div>
+                    </a>
+
+                    <!-- Proyecto 4 (Aparece desde la Derecha) -->
+                    <a href="#" class="project-card project-card-right block bg-gray-800 rounded-xl shadow-lg hover:shadow-indigo-500/30 overflow-hidden group">
+                        <div class="h-48 bg-gray-700 flex items-center justify-center">
+                            <span class="text-gray-500">Miniatura Proyecto 4</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Proyecto Cuatro</h3>
+                            <p class="text-gray-400">Breve descripción de este increíble proyecto...</p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Secciones de relleno (aún presentes en la página de inicio) -->
+        <section id="contacto" class="h-screen flex items-center justify-center">
+            <h2 class="text-3xl font-bold">Sección de Contacto (Placeholder)</h2>
+        </section>
+        <section id="redes" class="h-screen flex items-center justify-center">
+            <h2 class="text-3xl font-bold">Sección de Redes (Placeholder)</h2>
+        </section>
+    </main>
+
+    <!-- 5. BOTÓN DE VOLVER ARRIBA -->
+    <button id="scrollTopBtn" class="fixed bottom-6 right-6 w-12 h-12 bg-indigo-600 text-white rounded-full
+                                    flex items-center justify-center shadow-lg
+                                    hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500
+                                    transform transition-all duration-300 opacity-0 scale-0"
+            aria-label="Volver al inicio">
+        <!-- Flecha hacia arriba -->
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+    </button>
+
+
+    <!-- JAVASCRIPT para la interactividad (COMPLETO) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- 1. LÓGICA DEL MENÚ LATERAL ---
+            const menuBtn = document.getElementById('menu-btn');
+            const closeBtn = document.getElementById('close-btn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            function openSidebar() {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                overlay.classList.add('opacity-100');
+            }
+
+            function closeSidebar() {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+                overlay.classList.remove('opacity-100');
+            }
+
+            // Abrir menú
+            menuBtn.addEventListener('click', openSidebar);
+            
+            // Cerrar menú
+            closeBtn.addEventListener('click', closeSidebar);
+            overlay.addEventListener('click', closeSidebar);
+            
+            // CERRAR AL HACER CLIC EN ENLACE (YA NO ES NECESARIO PARA ENLACES EXTERNOS, PERO LO DEJAMOS POR SI ACASO)
+            sidebar.querySelectorAll('a').forEach(link => {
+                // No cerramos el sidebar aquí, ya que la navegación a otra página lo hará automáticamente.
+                // Si fueran enlaces de ancla (#), sí sería necesario:
+                if (link.getAttribute('href').startsWith('#')) {
+                    link.addEventListener('click', closeSidebar);
+                }
+            });
+
+            
+            // --- 2. LÓGICA DEL BOTÓN DE VOLVER ARRIBA ---
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+            window.addEventListener('scroll', () => {
+                // Muestra el botón después de scrollear 200px
+                if (window.scrollY > 200) {
+                    scrollTopBtn.classList.remove('opacity-0', 'scale-0');
+                    scrollTopBtn.classList.add('opacity-100', 'scale-100');
+                } else {
+                    scrollTopBtn.classList.remove('opacity-100', 'scale-100');
+                    scrollTopBtn.classList.add('opacity-0', 'scale-0');
+                }
+            });
+
+            // Acción de clic para el botón
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // Desplazamiento suave
+                });
+            });
+
+
+            // --- 3. LÓGICA DE ANIMACIÓN DE PROYECTOS AL SCROLLEAR ---
+            // (Esta lógica sigue aquí porque la página de inicio SÍ tiene los proyectos)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 
+            };
+
+            function observerCallback(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                observer.observe(card);
+            });
+
+        });
+    </script>
+
+</body>
+</html>
